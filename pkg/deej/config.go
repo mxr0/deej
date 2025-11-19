@@ -38,13 +38,13 @@ type CanonicalConfig struct {
 }
 
 const (
-	userConfigFilepath     = "config.yaml"
+	userConfigFilepath     = "/home/user/.config/deej/config.yaml"
 	internalConfigFilepath = "preferences.yaml"
 
 	userConfigName     = "config"
 	internalConfigName = "preferences"
 
-	userConfigPath = "."
+	userConfigPath = "/home/user/.config/deej/"
 
 	configType = "yaml"
 
@@ -54,7 +54,7 @@ const (
 	configKeyBaudRate            = "baud_rate"
 	configKeyNoiseReductionLevel = "noise_reduction"
 
-	defaultCOMPort  = "COM4"
+	defaultCOMPort  = "/dev/ttyUSB0"
 	defaultBaudRate = 9600
 )
 
