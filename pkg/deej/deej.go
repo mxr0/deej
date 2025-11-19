@@ -98,19 +98,9 @@ func (d *Deej) Initialize() error {
 		return fmt.Errorf("init session map: %w", err)
 	}
 
-	// decide whether to run with/without tray
-	if _, noTraySet := os.LookupEnv(envNoTray); noTraySet {
-
-		d.logger.Debugw("Running without tray icon", "reason", "envvar set")
-
-		// run in main thread while waiting on ctrl+C
-		d.setupInterruptHandler()
-		d.run()
-
-	} else {
-		d.setupInterruptHandler()
-		d.initializeTray(d.run)
-	}
+	// run in main thread while waiting on ctrl+C
+	d.setupInterruptHandler()
+	d.run()
 
 	return nil
 }
@@ -198,8 +188,6 @@ func (d *Deej) stop() error {
 		d.logger.Errorw("Failed to release session map", "error", err)
 		return fmt.Errorf("release session map: %w", err)
 	}
-
-	d.stopTray()
 
 	// attempt to sync on exit - this won't necessarily work but can't harm
 	d.logger.Sync()
